@@ -18,7 +18,7 @@ const birthdayConfig = {
     mainMessage: "Today is all about celebrating the radiant, kind, and unforgettable person you are.",
 
     // Path to her single photograph
-    photoPath: "assets/sakshi.jpg",
+    photoPath: "sakshi.jpg",
 
     // Chapter 2: Portrait Subtitle & Note
     portraitQuote: "Some people make the world feel a little brighter just by being themselves.",
