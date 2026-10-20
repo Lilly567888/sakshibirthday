@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday 💜 | A Little World Made Just For You</title>
+    <meta name="description" content="A handcrafted, elegant interactive birthday celebration website.">
+
+    <!-- Google Fonts with graceful local fallbacks -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Ambient Canvas for Petals & Soft Glowing Particles -->
+    <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+    <!-- Global Subtle Header & Progress Indicator -->
+    <header class="experience-header" role="banner">
+        <div class="header-logo">
+            <span class="sparkle-icon">✧</span>
+            <span class="recipient-badge" data-bind="nickname">Birthday Princess</span>
+        </div>
+        <div class="progress-display" aria-live="polite">
+            <span id="current-chapter-num">01</span>
+            <span class="divider">/</span>
+            <span id="total-chapters-num">10</span>
+        </div>
+    </header>
+
+    <!-- Main Multi-Chapter App Container -->
+    <main id="app-container" role="main">
+
+        <!-- ================= PAGE 1 ================= -->
+        <section class="chapter active" id="chapter-1" aria-labelledby="title-ch-1">
+            <div class="chapter-content hero-layout">
+                <div class="badge-pill">A Special Celebration</div>
+                <p class="intro-subtext" id="p1-teaser">Something beautiful is waiting for you...</p>
+                <h1 class="hero-title" id="title-ch-1">
+                    Happy Birthday, <span class="highlight-text" data-bind="recipientName">Sakshi</span> <span class="heart-emoji">💜</span>
+                </h1>
+                <p class="hero-subtitle" data-bind="subGreeting">A little world, created especially for you.</p>
+
+                <div class="action-wrap">
+                    <button type="button" class="btn btn-primary" id="btn-start-experience">
+                        <span>Let's Begin ✨</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 2 ================= -->
+        <section class="chapter" id="chapter-2" aria-labelledby="title-ch-2">
+            <div class="chapter-content portrait-layout">
+                <div class="portrait-column">
+                    <div class="portrait-card" id="portrait-tilt-card">
+                        <div class="portrait-frame">
+                            <img src="assets/her-photo.jpg" alt="Photograph of Birthday Celebrant" class="celebrant-photo" id="main-portrait-img">
+                            <div class="photo-fallback" id="portrait-fallback" aria-hidden="true">
+                                <span class="fallback-icon">🌸</span>
+                                <span class="fallback-name" data-bind="recipientName">Sophia</span>
+                            </div>
+                        </div>
+                        <div class="frame-flower-accent top-right">🌸</div>
+                        <div class="frame-flower-accent bottom-left">✨</div>
+                    </div>
+                </div>
+
+                <div class="text-column">
+                    <span class="chapter-tag">Chapter 02 • A Little Portrait</span>
+                    <h2 class="section-title" id="title-ch-2">Radiant & True</h2>
+                    <blockquote class="poetic-quote" data-bind="portraitQuote">
+                        "Some people make the world feel a little brighter just by being themselves."
+                    </blockquote>
+                    <p class="section-description" data-bind="portraitNote">
+                        Your presence brings a quiet warmth wherever you go.
+                    </p>
+                    <div class="nav-controls">
+                        <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                        <button type="button" class="btn btn-primary nav-btn-next">Continue 🌷</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 3 ================= -->
+        <section class="chapter" id="chapter-3" aria-labelledby="title-ch-3">
+            <div class="chapter-content">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 03 • Six Reminders</span>
+                    <h2 class="section-title" id="title-ch-3">Things That Make You Special</h2>
+                    <p class="section-subtitle">Six little reminders of what makes you wonderful. Tap any card to reveal.</p>
+                </div>
+
+                <div class="compliment-grid" id="compliments-container">
+                    <!-- Populated via script.js -->
+                </div>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary nav-btn-next">Next Chapter 💜</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 4 ================= -->
+        <section class="chapter" id="chapter-4" aria-labelledby="title-ch-4">
+            <div class="chapter-content garden-layout">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 04 • The Lavender Meadow</span>
+                    <h2 class="section-title" id="title-ch-4">A Page Full of Flowers</h2>
+                    <p class="section-subtitle">"May your life always have room for beautiful things."</p>
+                </div>
+
+                <div class="garden-scene" id="garden-scene">
+                    <div class="garden-bloom bloom-1"></div>
+                    <div class="garden-bloom bloom-2"></div>
+                    <div class="garden-bloom bloom-3"></div>
+                    <div class="garden-bloom bloom-4"></div>
+                </div>
+
+                <div class="garden-wishes-box">
+                    <div id="garden-wishes-output" class="garden-messages-stream" aria-live="polite">
+                        <p class="placeholder-prompt">Click the blossom button below to gather wishes from the garden.</p>
+                    </div>
+                    <button type="button" class="btn btn-soft" id="btn-reveal-flower-wish">
+                        <span>Gather a Wish 🌸</span>
+                    </button>
+                </div>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary nav-btn-next">Continue 🎀</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 5 ================= -->
+        <section class="chapter" id="chapter-5" aria-labelledby="title-ch-5">
+            <div class="chapter-content">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 05 • Sincere Wishes</span>
+                    <h2 class="section-title" id="title-ch-5">Little Things, Big Smiles</h2>
+                    <p class="section-subtitle">Thoughtful wishes gathered like handwritten notes. Click to unfold each wish.</p>
+                </div>
+
+                <div class="wishes-grid" id="wishes-collection-container">
+                    <!-- Populated via script.js -->
+                </div>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary nav-btn-next">View Scrapbook 📸</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 6 ================= -->
+        <section class="chapter" id="chapter-6" aria-labelledby="title-ch-6">
+            <div class="chapter-content scrapbook-layout">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 06 • Digital Keepsake</span>
+                    <h2 class="section-title" id="title-ch-6">A Little Scrapbook</h2>
+                    <p class="section-subtitle">A collection of moments and appreciation, preserved in soft lavender.</p>
+                </div>
+
+                <div class="scrapbook-desk">
+                    <!-- Item 1: Polaroid -->
+                    <div class="scrapbook-item polaroid-item">
+                        <div class="tape-strip top-center"></div>
+                        <div class="polaroid-inner">
+                            <div class="polaroid-photo-frame">
+                                <img src="assets/her-photo.jpg" alt="Celebrant in Polaroid format" class="celebrant-photo">
+                            </div>
+                            <div class="polaroid-caption" data-bind="recipientName">Sophia</div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2: Written Scrapbook Card -->
+                    <div class="scrapbook-item paper-note-item">
+                        <div class="tape-strip top-left"></div>
+                        <div class="scrap-card-inner">
+                            <span class="note-date" data-bind="scrapbookDate">Cherished Moment</span>
+                            <h3 class="note-heading">Always Radiant</h3>
+                            <p class="note-body" data-bind="scrapbookMemory">
+                                Looking back at every memory we share, one thing is always clear: every moment is elevated simply because you are there.
+                            </p>
+                            <span class="signature-tag" data-bind="senderName">With care, Julian</span>
+                        </div>
+                    </div>
+
+                    <!-- Item 3: Framed Mini Portrait -->
+                    <div class="scrapbook-item frame-item">
+                        <div class="tilted-portrait-border">
+                            <img src="assets/her-photo.jpg" alt="Celebrant Mini Portrait" class="celebrant-photo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary nav-btn-next">A Moment of Magic ✨</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 7 ================= -->
+        <section class="chapter" id="chapter-7" aria-labelledby="title-ch-7">
+            <div class="chapter-content magic-layout">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 07 • Touch of Wonder</span>
+                    <h2 class="section-title" id="title-ch-7">A Moment of Magic</h2>
+                    <p class="section-subtitle">Tap the glowing heart to reveal what is resting quietly underneath.</p>
+                </div>
+
+                <div class="magic-stage">
+                    <div class="magic-heart-anchor" id="magic-heart-btn" role="button" tabindex="0" aria-label="Tap to unlock magic message">
+                        <div class="ripple-ring ring-1"></div>
+                        <div class="ripple-ring ring-2"></div>
+                        <div class="glowing-heart-svg">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 88.5C50 88.5 12 62.5 12 34C12 20.1929 23.1929 9 37 9C44.887 9 50 15 50 15C50 15 55.113 9 63 9C76.8071 9 88 20.1929 88 34C88 62.5 50 88.5 50 88.5Z" fill="url(#lavender-heart-gradient)" stroke="#C4B5FD" stroke-width="2"/>
+                                <defs>
+                                    <linearGradient id="lavender-heart-gradient" x1="12" y1="9" x2="88" y2="88.5" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="#C4B5FD" />
+                                        <stop offset="0.5" stop-color="#A78BFA" />
+                                        <stop offset="1" stop-color="#7C3AED" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <span class="heart-pulse-indicator">Tap me 💜</span>
+                    </div>
+
+                    <div class="magic-revealed-card hidden" id="magic-revealed-message">
+                        <div class="card-sparkle-header">✧ ✦ ✧</div>
+                        <p class="magic-reminder-text">"Here's a little reminder that you deserve beautiful things."</p>
+                        <p class="magic-secret-text" data-bind="magicSecretMessage"></p>
+                    </div>
+                </div>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary nav-btn-next">Next Chapter 🦋</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 8 ================= -->
+        <section class="chapter" id="chapter-8" aria-labelledby="title-ch-8">
+            <div class="chapter-content">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 08 • Looking Forward</span>
+                    <h2 class="section-title" id="title-ch-8">Wishes for Your New Chapter</h2>
+                    <p class="section-subtitle">As another year opens up before you, here are three wishes for your path.</p>
+                </div>
+
+                <div class="trio-cards-container">
+                    <article class="trio-card">
+                        <div class="trio-icon-badge">✨</div>
+                        <h3 class="trio-title">01. Happiness</h3>
+                        <p class="trio-body" data-bind="newChapterHappiness"></p>
+                    </article>
+
+                    <article class="trio-card featured">
+                        <div class="trio-icon-badge">🦋</div>
+                        <h3 class="trio-title">02. New Adventures</h3>
+                        <p class="trio-body" data-bind="newChapterAdventures"></p>
+                    </article>
+
+                    <article class="trio-card">
+                        <div class="trio-icon-badge">🕊️</div>
+                        <h3 class="trio-title">03. Beautiful Memories</h3>
+                        <p class="trio-body" data-bind="newChapterMemories"></p>
+                    </article>
+                </div>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary nav-btn-next">Almost There 💌</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 9 ================= -->
+        <section class="chapter" id="chapter-9" aria-labelledby="title-ch-9">
+            <div class="chapter-content teaser-envelope-layout">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 09 • A Quiet Interlude</span>
+                    <h2 class="section-title" id="title-ch-9">Before the Last Surprise</h2>
+                    <p class="section-subtitle">"There's something special I saved for the very end..."</p>
+                </div>
+
+                <div class="preview-envelope-wrapper">
+                    <div class="mini-envelope" id="preview-envelope-interactive" role="button" tabindex="0" aria-label="Tap to open note preview">
+                        <div class="envelope-back"></div>
+                        <div class="envelope-note-paper" id="preview-note-paper">
+                            <span class="note-paper-icon">💌</span>
+                            <p class="note-paper-snippet" data-bind="envelopePreview">
+                                A little heartfelt letter waiting just for you on the final page...
+                            </p>
+                        </div>
+                        <div class="envelope-front-left"></div>
+                        <div class="envelope-front-right"></div>
+                        <div class="envelope-front-bottom"></div>
+                        <div class="envelope-flap" id="preview-envelope-flap">
+                            <div class="envelope-heart-seal">💜</div>
+                        </div>
+                    </div>
+                    <p class="envelope-hint">Click the envelope to take a peek</p>
+                </div>
+
+                <blockquote class="poetic-quote centered">
+                    "Some words are better saved for a special moment."
+                </blockquote>
+
+                <div class="nav-controls centered">
+                    <button type="button" class="btn btn-secondary nav-btn-prev">Back</button>
+                    <button type="button" class="btn btn-primary btn-special-pulse" id="btn-go-to-letter">
+                        <span>Open Your Final Surprise 💜</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= PAGE 10 ================= -->
+        <section class="chapter" id="chapter-10" aria-labelledby="title-ch-10">
+            <div class="chapter-content letter-layout">
+                <div class="chapter-header-center">
+                    <span class="chapter-tag">Chapter 10 • Handcrafted Letter</span>
+                    <h2 class="section-title" id="title-ch-10">A Letter Just For You</h2>
+                    <p class="section-subtitle">One last thing, prepared with care and warm wishes...</p>
+                </div>
+
+                <div class="grand-letter-box" id="grand-letter-box">
+                    <!-- Grand 3D Envelope -->
+                    <div class="big-envelope" id="big-envelope-unit">
+                        <div class="big-envelope-flap" id="big-envelope-flap">
+                            <div class="wax-seal">
+                                <span>💜</span>
+                            </div>
+                        </div>
+                        <div class="big-envelope-pocket">
+                            <div class="envelope-address-label">
+                                <span class="label-to">For:</span>
+                                <span class="label-name" data-bind="recipientName">Sakshi</span>
+                                <span class="label-date" data-bind="birthdayDate">October 21</span>
+                            </div>
+                        </div>
+
+                        <!-- Sliding Letter Sheet -->
+                        <div class="unfolded-letter-sheet" id="unfolded-letter">
+                            <div class="letter-sheet-watermark">✦</div>
+                            <div class="letter-sheet-content" id="letter-text-target">
+                                <!-- Populated from config.js letter -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Envelope Trigger Button -->
+                    <div class="letter-action-row" id="letter-trigger-container">
+                        <button type="button" class="btn btn-primary btn-large" id="btn-open-grand-letter">
+                            <span>Open Your Letter 💌</span>
+                        </button>
+                    </div>
+
+                    <!-- Post-Open Action Buttons -->
+                    <div class="letter-opened-controls hidden" id="letter-post-controls">
+                        <button type="button" class="btn btn-soft" id="btn-read-again">Read Again</button>
+                        <button type="button" class="btn btn-secondary" id="btn-return-beginning">Return to the Beginning</button>
+                        <button type="button" class="btn btn-primary btn-sparkle" id="btn-final-celebration">
+                            <span>Final Celebration ✨</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Screen Final Celebration Overlay -->
+            <div class="celebration-overlay" id="celebration-overlay" aria-hidden="true">
+                <div class="celebration-modal">
+                    <div class="celebration-sparkles">✨ 🌸 ✨</div>
+                    <h2 class="celebration-title">
+                        Happy Birthday, <span data-bind="recipientName">Sakshi</span> <span class="heart">💜</span>
+                    </h2>
+                    <p class="celebration-quote">
+                        "May your world always be filled with beautiful little moments."
+                    </p>
+                    <p class="celebration-subtext" data-bind="senderName">With lots of love and warmest wishes</p>
+                    <button type="button" class="btn btn-primary" id="btn-close-celebration">Close with a Smile 🌸</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

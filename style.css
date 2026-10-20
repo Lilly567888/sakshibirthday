@@ -1,0 +1,1363 @@
+/* ===================================================================
+   A LITTLE WORLD MADE JUST FOR YOU - DESIGN SYSTEM & STYLESHEET
+   =================================================================== */
+
+/* 1. CSS Custom Properties / Design Tokens */
+:root {
+    --color-white: #FFFFFF;
+    --color-lavender-mist: #F4F0FF;
+    --color-soft-lavender: #E6DCFF;
+    --color-light-purple: #C4B5FD;
+    --color-medium-lavender: #A78BFA;
+    --color-deep-purple: #7C3AED;
+    --color-midnight-plum: #352449;
+    --color-blush-pink: #FCE7F3;
+
+    /* Semantic Aliases */
+    --bg-primary: #FFFFFF;
+    --bg-subtle: #F4F0FF;
+    --text-primary: #352449;
+    --text-secondary: #6B5B82;
+    --text-muted: #8E7EA6;
+    --accent-purple: #7C3AED;
+    --border-subtle: rgba(167, 139, 250, 0.25);
+    --border-strong: rgba(124, 58, 237, 0.4);
+
+    /* Shadows */
+    --shadow-soft: 0 10px 30px rgba(124, 58, 237, 0.08);
+    --shadow-medium: 0 18px 40px rgba(124, 58, 237, 0.12);
+    --shadow-floating: 0 24px 60px rgba(53, 36, 73, 0.12);
+    --glow-lavender: 0 0 35px rgba(196, 181, 253, 0.5);
+
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', Garamond, 'Times New Roman', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+    /* Transitions */
+    --transition-smooth: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 2. Reset & Base Styles */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    background-color: var(--color-white);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Background Ambient Canvas */
+#ambient-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 3. Header & Progress Indicator */
+.experience-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.25rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-deep-purple);
+}
+
+.sparkle-icon {
+    color: var(--color-medium-lavender);
+}
+
+.progress-display {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--color-deep-purple);
+}
+
+.progress-display .divider {
+    margin: 0 0.3rem;
+    color: var(--color-light-purple);
+}
+
+/* 4. Main App Container & Chapter Switching */
+#app-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 10;
+}
+
+.chapter {
+    display: none;
+    width: 100%;
+    min-height: 100vh;
+    padding: 6.5rem 1.5rem 4.5rem;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity var(--transition-slow), transform var(--transition-slow);
+}
+
+.chapter.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chapter-content {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chapter-header-center {
+    text-align: center;
+    max-width: 720px;
+    margin-bottom: 2.75rem;
+}
+
+/* 5. Typography Elements */
+.chapter-tag {
+    display: inline-block;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    color: var(--color-deep-purple);
+    background: var(--color-lavender-mist);
+    padding: 0.35rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-soft-lavender);
+    margin-bottom: 0.9rem;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 600;
+    color: var(--color-midnight-plum);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+.poetic-quote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: var(--color-deep-purple);
+    border-left: 3px solid var(--color-medium-lavender);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+}
+
+.poetic-quote.centered {
+    border-left: none;
+    padding-left: 0;
+    text-align: center;
+    max-width: 600px;
+}
+
+/* 6. Buttons & Interactions */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.96rem;
+    font-weight: 500;
+    padding: 0.85rem 1.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    border: 1px solid transparent;
+    transition: all var(--transition-smooth);
+    user-select: none;
+}
+
+.btn:focus-visible {
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.4);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-deep-purple) 0%, var(--color-medium-lavender) 100%);
+    color: var(--color-white);
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.28);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(124, 58, 237, 0.38);
+}
+
+.btn-secondary {
+    background: var(--color-white);
+    color: var(--color-midnight-plum);
+    border: 1px solid var(--color-soft-lavender);
+}
+
+.btn-secondary:hover {
+    background: var(--color-lavender-mist);
+    border-color: var(--color-light-purple);
+    transform: translateY(-2px);
+}
+
+.btn-soft {
+    background: var(--color-lavender-mist);
+    color: var(--color-deep-purple);
+    border: 1px solid var(--color-soft-lavender);
+}
+
+.btn-soft:hover {
+    background: var(--color-soft-lavender);
+    transform: translateY(-2px);
+}
+
+.btn-large {
+    font-size: 1.05rem;
+    padding: 1.05rem 2.6rem;
+}
+
+.btn-special-pulse {
+    animation: gentle-pulse 2.5s infinite ease-in-out;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(124, 58, 237, 0.28); }
+    50% { box-shadow: 0 12px 35px rgba(124, 58, 237, 0.55); }
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.75rem;
+}
+
+.nav-controls.centered {
+    justify-content: center;
+}
+
+/* ================= PAGE 1: THE FIRST HELLO ================= */
+.hero-layout {
+    text-align: center;
+    max-width: 800px;
+}
+
+.badge-pill {
+    display: inline-block;
+    padding: 0.4rem 1.1rem;
+    background: var(--color-lavender-mist);
+    border: 1px solid var(--color-soft-lavender);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--color-deep-purple);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.intro-subtext {
+    font-size: 1.15rem;
+    color: var(--color-medium-lavender);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.8rem, 6.5vw, 4.8rem);
+    font-weight: 700;
+    color: var(--color-midnight-plum);
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+}
+
+.highlight-text {
+    background: linear-gradient(135deg, var(--color-deep-purple) 0%, var(--color-medium-lavender) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--text-secondary);
+    font-weight: 300;
+    margin-bottom: 2.5rem;
+}
+
+/* ================= PAGE 2: A LITTLE PORTRAIT ================= */
+.portrait-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.portrait-column {
+    display: flex;
+    justify-content: center;
+}
+
+.portrait-card {
+    position: relative;
+    padding: 1rem;
+    background: var(--color-white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-floating);
+    border: 1px solid var(--color-soft-lavender);
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    max-width: 380px;
+    width: 100%;
+}
+
+.portrait-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--color-lavender-mist);
+    border: 2px solid var(--color-soft-lavender);
+}
+
+.celebrant-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.portrait-card:hover .celebrant-photo {
+    transform: scale(1.03);
+}
+
+.photo-fallback {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--color-lavender-mist) 0%, var(--color-soft-lavender) 100%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-deep-purple);
+}
+
+.photo-fallback.active {
+    display: flex;
+}
+
+.fallback-icon {
+    font-size: 3rem;
+}
+
+.fallback-name {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.frame-flower-accent {
+    position: absolute;
+    font-size: 1.75rem;
+    z-index: 2;
+}
+
+.frame-flower-accent.top-right {
+    top: -12px;
+    right: -12px;
+}
+
+.frame-flower-accent.bottom-left {
+    bottom: -12px;
+    left: -12px;
+}
+
+.text-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* ================= PAGE 3: COMPLIMENTS ================= */
+.compliment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    width: 100%;
+}
+
+.compliment-card {
+    background: var(--color-white);
+    border-radius: 20px;
+    padding: 1.85rem;
+    border: 1px solid var(--color-soft-lavender);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.compliment-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--color-light-purple);
+}
+
+.compliment-card.revealed {
+    background: var(--color-lavender-mist);
+    border-color: var(--color-medium-lavender);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.85rem;
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: var(--color-midnight-plum);
+    margin-bottom: 0.35rem;
+}
+
+.card-preview {
+    font-size: 0.9rem;
+    color: var(--color-medium-lavender);
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.card-full-text {
+    font-size: 0.92rem;
+    color: var(--text-primary);
+    line-height: 1.55;
+    margin-top: 0.75rem;
+    display: none;
+    animation: fadeInText 0.4s ease forwards;
+}
+
+.compliment-card.revealed .card-preview {
+    display: none;
+}
+
+.compliment-card.revealed .card-full-text {
+    display: block;
+}
+
+@keyframes fadeInText {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= PAGE 4: LAVENDER GARDEN ================= */
+.garden-layout {
+    text-align: center;
+}
+
+.garden-scene {
+    position: relative;
+    width: 100%;
+    max-width: 750px;
+    height: 160px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    margin: 1.5rem 0;
+}
+
+.garden-bloom {
+    width: 20px;
+    height: 90px;
+    background: linear-gradient(to top, #7C3AED, #C4B5FD);
+    border-radius: 12px;
+    position: relative;
+    animation: gentle-sway 4s ease-in-out infinite alternate;
+}
+
+.garden-bloom::before {
+    content: '🌸';
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+}
+
+.bloom-1 { height: 110px; animation-delay: 0s; }
+.bloom-2 { height: 130px; animation-delay: 0.8s; }
+.bloom-3 { height: 100px; animation-delay: 1.4s; }
+.bloom-4 { height: 120px; animation-delay: 0.4s; }
+
+@keyframes gentle-sway {
+    0% { transform: rotate(-4deg); }
+    100% { transform: rotate(4deg); }
+}
+
+.garden-wishes-box {
+    background: var(--color-white);
+    border: 1px solid var(--color-soft-lavender);
+    border-radius: 20px;
+    padding: 2.25rem;
+    max-width: 650px;
+    width: 100%;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.garden-messages-stream {
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.garden-wish-item {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--color-deep-purple);
+    animation: fadeInText 0.5s ease;
+}
+
+.placeholder-prompt {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* ================= PAGE 5: WISH COLLECTION ================= */
+.wishes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    width: 100%;
+}
+
+.wish-item-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-soft-lavender);
+    border-radius: 18px;
+    padding: 1.75rem;
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    text-align: left;
+}
+
+.wish-item-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--color-medium-lavender);
+}
+
+.wish-item-card.unfolded {
+    background: var(--color-lavender-mist);
+}
+
+.wish-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.wish-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-midnight-plum);
+    margin-bottom: 0.5rem;
+}
+
+.wish-message {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.wish-item-card.unfolded .wish-message {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 0.75rem;
+}
+
+.wish-action-hint {
+    font-size: 0.8rem;
+    color: var(--color-medium-lavender);
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 0.5rem;
+}
+
+.wish-item-card.unfolded .wish-action-hint {
+    display: none;
+}
+
+/* ================= PAGE 6: SCRAPBOOK ================= */
+.scrapbook-layout {
+    width: 100%;
+}
+
+.scrapbook-desk {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+.scrapbook-item {
+    position: relative;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: var(--shadow-medium);
+    transition: transform 0.3s ease;
+}
+
+.scrapbook-item:hover {
+    transform: scale(1.03) !important;
+    z-index: 5;
+}
+
+.tape-strip {
+    position: absolute;
+    width: 80px;
+    height: 22px;
+    background: rgba(230, 220, 255, 0.7);
+    backdrop-filter: blur(4px);
+    border: 1px dashed rgba(167, 139, 250, 0.4);
+    z-index: 3;
+}
+
+.tape-strip.top-center {
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+}
+
+.tape-strip.top-left {
+    top: -12px;
+    left: -15px;
+    transform: rotate(-15deg);
+}
+
+.polaroid-item {
+    padding: 1rem 1rem 1.8rem;
+    transform: rotate(-3deg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.polaroid-photo-frame {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--color-lavender-mist);
+}
+
+.polaroid-caption {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    text-align: center;
+    margin-top: 0.9rem;
+    color: var(--color-midnight-plum);
+}
+
+.paper-note-item {
+    padding: 2.25rem 2rem;
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--color-lavender-mist) 100%);
+    border: 1px solid var(--color-soft-lavender);
+    transform: rotate(1deg);
+}
+
+.note-date {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-medium-lavender);
+    font-weight: 600;
+}
+
+.note-heading {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--color-midnight-plum);
+    margin: 0.4rem 0 0.8rem;
+}
+
+.note-body {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.signature-tag {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--color-deep-purple);
+}
+
+.frame-item {
+    padding: 0.75rem;
+    transform: rotate(4deg);
+    background: var(--color-lavender-mist);
+    border: 2px solid var(--color-soft-lavender);
+}
+
+.tilted-portrait-border {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+/* ================= PAGE 7: MOMENT OF MAGIC ================= */
+.magic-layout {
+    text-align: center;
+}
+
+.magic-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 1rem 0;
+}
+
+.magic-heart-anchor {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+
+.glowing-heart-svg {
+    width: 90px;
+    height: 90px;
+    filter: drop-shadow(0 0 15px rgba(167, 139, 250, 0.6));
+    transition: transform 0.3s ease;
+}
+
+.magic-heart-anchor:hover .glowing-heart-svg {
+    transform: scale(1.1);
+}
+
+.ripple-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-medium-lavender);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.magic-heart-anchor:hover .ring-1 {
+    animation: ripple-effect 1.8s infinite ease-out;
+}
+
+@keyframes ripple-effect {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.heart-pulse-indicator {
+    position: absolute;
+    bottom: -28px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-deep-purple);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.magic-revealed-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-soft-lavender);
+    border-radius: 20px;
+    padding: 2.25rem;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: var(--shadow-medium);
+    animation: fadeInText 0.6s ease;
+}
+
+.magic-revealed-card.hidden {
+    display: none;
+}
+
+.card-sparkle-header {
+    color: var(--color-medium-lavender);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.magic-reminder-text {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-deep-purple);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.magic-secret-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ================= PAGE 8: NEW CHAPTER ================= */
+.trio-cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+}
+
+.trio-card {
+    background: var(--color-white);
+    border-radius: 22px;
+    padding: 2.25rem 1.85rem;
+    border: 1px solid var(--color-soft-lavender);
+    box-shadow: var(--shadow-soft);
+    text-align: left;
+    transition: transform var(--transition-smooth);
+}
+
+.trio-card:hover {
+    transform: translateY(-6px);
+}
+
+.trio-card.featured {
+    background: linear-gradient(180deg, var(--color-white) 0%, var(--color-lavender-mist) 100%);
+    border-color: var(--color-light-purple);
+}
+
+.trio-icon-badge {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+}
+
+.trio-title {
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    color: var(--color-midnight-plum);
+    margin-bottom: 0.75rem;
+}
+
+.trio-body {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* ================= PAGE 9: BEFORE THE LAST SURPRISE ================= */
+.teaser-envelope-layout {
+    text-align: center;
+}
+
+.preview-envelope-wrapper {
+    margin: 1.5rem 0 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mini-envelope {
+    position: relative;
+    width: 260px;
+    height: 170px;
+    background: #EAE3FC;
+    border-radius: 8px;
+    box-shadow: var(--shadow-floating);
+    cursor: pointer;
+    perspective: 800px;
+}
+
+.mini-envelope .envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #D9CEF7;
+    border-radius: 8px;
+}
+
+.mini-envelope .envelope-note-paper {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    background: var(--color-white);
+    border-radius: 6px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 2;
+}
+
+.mini-envelope.opened .envelope-note-paper {
+    transform: translateY(-70px);
+}
+
+.note-paper-icon {
+    font-size: 1.5rem;
+}
+
+.note-paper-snippet {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin-top: 0.3rem;
+}
+
+.mini-envelope .envelope-front-left {
+    position: absolute;
+    inset: 0;
+    border-left: 130px solid #E6DCFF;
+    border-top: 85px solid transparent;
+    border-bottom: 85px solid transparent;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.mini-envelope .envelope-front-right {
+    position: absolute;
+    inset: 0;
+    border-right: 130px solid #DFD3FB;
+    border-top: 85px solid transparent;
+    border-bottom: 85px solid transparent;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.mini-envelope .envelope-front-bottom {
+    position: absolute;
+    inset: 0;
+    border-bottom: 95px solid #D4C4F7;
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.mini-envelope .envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top: 95px solid #C4B5FD;
+    border-left: 130px solid transparent;
+    border-right: 130px solid transparent;
+    transform-origin: top center;
+    transition: transform 0.6s ease;
+    z-index: 5;
+}
+
+.mini-envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-heart-seal {
+    position: absolute;
+    top: -75px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.25rem;
+}
+
+.envelope-hint {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: var(--color-medium-lavender);
+}
+
+/* ================= PAGE 10: A LETTER JUST FOR YOU ================= */
+.letter-layout {
+    width: 100%;
+}
+
+.grand-letter-box {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.big-envelope {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    min-height: 340px;
+    background: #F4F0FF;
+    border-radius: 16px;
+    border: 1px solid var(--color-soft-lavender);
+    box-shadow: var(--shadow-floating);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+}
+
+.big-envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: #E6DCFF;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    z-index: 6;
+    display: flex;
+    justify-content: center;
+}
+
+.big-envelope.unsealed .big-envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.wax-seal {
+    position: absolute;
+    bottom: -15px;
+    width: 48px;
+    height: 48px;
+    background: var(--color-deep-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.big-envelope-pocket {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.envelope-address-label {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.25rem 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    border: 1px dashed var(--color-light-purple);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.label-to {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-medium-lavender);
+}
+
+.label-name {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-midnight-plum);
+}
+
+.label-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Unfolding Paper Sheet */
+.unfolded-letter-sheet {
+    position: relative;
+    width: 95%;
+    max-width: 620px;
+    background: var(--color-white);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    box-shadow: var(--shadow-floating);
+    border: 1px solid var(--color-soft-lavender);
+    display: none;
+    z-index: 10;
+    margin-top: 1rem;
+    animation: unfoldUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.big-envelope.unsealed + #letter-trigger-container {
+    display: none;
+}
+
+@keyframes unfoldUp {
+    0% {
+        opacity: 0;
+        transform: translateY(60px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.letter-sheet-watermark {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--color-soft-lavender);
+}
+
+.letter-sheet-content {
+    white-space: pre-line;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.85;
+    color: var(--text-primary);
+}
+
+.letter-action-row {
+    margin-top: 2rem;
+}
+
+.letter-opened-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    z-index: 12;
+}
+
+.letter-opened-controls.hidden {
+    display: none;
+}
+
+/* ================= FINAL CELEBRATION MODAL ================= */
+.celebration-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(53, 36, 73, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 1.5rem;
+}
+
+.celebration-overlay.active {
+    display: flex;
+    animation: fadeInOverlay 0.5s ease forwards;
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.celebration-modal {
+    background: var(--color-white);
+    border-radius: 28px;
+    padding: 3.5rem 2.5rem;
+    max-width: 580px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--color-soft-lavender);
+    transform: scale(0.92);
+    animation: zoomModal 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+@keyframes zoomModal {
+    to { transform: scale(1); }
+}
+
+.celebration-sparkles {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.celebration-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--color-midnight-plum);
+    margin-bottom: 1rem;
+}
+
+.celebration-quote {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--color-deep-purple);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.celebration-subtext {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+/* 7. Responsive Media Queries */
+@media (max-width: 992px) {
+    .portrait-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+
+    .text-column {
+        align-items: center;
+    }
+
+    .poetic-quote {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .compliment-grid,
+    .wishes-grid,
+    .trio-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .scrapbook-desk {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .experience-header {
+        padding: 1rem 1.25rem;
+    }
+
+    .chapter {
+        padding: 5.5rem 1rem 3.5rem;
+    }
+
+    .compliment-grid,
+    .wishes-grid,
+    .trio-cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .nav-controls {
+        flex-direction: column-reverse;
+        width: 100%;
+        gap: 0.75rem;
+    }
+
+    .letter-opened-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .unfolded-letter-sheet {
+        padding: 2rem 1.25rem;
+    }
+
+    .celebration-modal {
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+/* 8. Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
